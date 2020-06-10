@@ -14,6 +14,7 @@
 #include <errno.h>
 #include <memory>
 #include <string>
+#include <stdexcept>
 
 namespace osinside {
 namespace appx {
