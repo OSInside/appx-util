@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 #
 # Copyright (c) 2016-present, Facebook, Inc.
 # Copyright (c) 2021, Neal Gompa
@@ -44,7 +44,7 @@ class TestXMLEscaping(unittest.TestCase):
                 # to escape.
                 escaped = filename.replace('&', '&amp;')
                 escaped = escaped.replace("'", '&apos;')
-                self.assertIn(escaped, block_map_text)
+                self.assertIn(escaped.encode('utf-8'), block_map_text)
 
 if __name__ == '__main__':
     unittest.main()

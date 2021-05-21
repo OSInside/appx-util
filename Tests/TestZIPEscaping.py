@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 #
 # Copyright (c) 2016-present, Facebook, Inc.
 # Copyright (c) 2021, Neal Gompa
@@ -12,7 +12,7 @@ import appx.util
 import os
 import subprocess
 import unittest
-import urllib
+import urllib.parse
 import zipfile
 
 class TestZIPEscaping(unittest.TestCase):
@@ -21,7 +21,7 @@ class TestZIPEscaping(unittest.TestCase):
     '''
 
     def _get_escaped_filename(self, filename):
-        return urllib.quote(filename, safe='~/')
+        return urllib.parse.quote(filename, safe='~/')
 
     def _create_appx_with_file(self, d, filename):
         file_path = os.path.join(d, filename)
@@ -56,7 +56,7 @@ class TestZIPEscaping(unittest.TestCase):
 
     def test_unicode_filename(self):
         with appx.util.temp_dir() as d:
-            filename = u'\u00c0\u0800\U00010000'.encode('utf-8')
+            filename = u'\u00c0\u0800\U00010000'
             appx_path = self._create_appx_with_file(d, filename)
             with zipfile.ZipFile(appx_path) as test_appx:
                 escaped_filename = self._get_escaped_filename(filename)

@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 #
 # Copyright (c) 2016-present, Facebook, Inc.
 # Copyright (c) 2021, Neal Gompa
@@ -33,7 +33,7 @@ class TestContentTypes(unittest.TestCase):
                                    '-o', output_appx,
                                    file_path])
             with zipfile.ZipFile(output_appx) as test_appx:
-                content_types_text = test_appx.read('[Content_Types].xml')
+                content_types_text = test_appx.read('[Content_Types].xml').decode('utf-8')
                 # XML namespaces are a pain to deal with
                 content_types_text = re.sub(' xmlns="[^"]+"', '',
                                             content_types_text, count=1)

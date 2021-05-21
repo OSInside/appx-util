@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 #
 # Copyright (c) 2016-present, Facebook, Inc.
 # Copyright (c) 2021, Neal Gompa
@@ -22,7 +22,7 @@ class TestValidZIP(unittest.TestCase):
     def test_unsigned_zip(self):
         with appx.util.temp_dir() as d:
             with open(os.path.join(d, 'README.txt'), 'wb') as readme:
-                readme.write('This is a test file.\n')
+                readme.write(b'This is a test file.\n')
             subprocess.check_call([appx_exe(),
                                    '-o', os.path.join(d, 'test.appx'),
                                    os.path.join(d, 'README.txt')])
@@ -32,7 +32,7 @@ class TestValidZIP(unittest.TestCase):
     def test_signed_zip(self):
         with appx.util.temp_dir() as d:
             with open(os.path.join(d, 'README.txt'), 'wb') as readme:
-                readme.write('This is a test file.\n')
+                readme.write(b'This is a test file.\n')
             subprocess.check_call([appx_exe(),
                                    '-o', os.path.join(d, 'test.appx'),
                                    '-c', appx.util.test_key_path(),
@@ -43,7 +43,7 @@ class TestValidZIP(unittest.TestCase):
     def test_unsigned_compressed_zip(self):
         with appx.util.temp_dir() as d:
             with open(os.path.join(d, 'README.txt'), 'wb') as readme:
-                readme.write('This is a test file.\n')
+                readme.write(b'This is a test file.\n')
             subprocess.check_call([appx_exe(),
                                    '-o', os.path.join(d, 'test.appx'),
                                    '-9',
@@ -54,7 +54,7 @@ class TestValidZIP(unittest.TestCase):
     def test_signed_compressed_zip(self):
         with appx.util.temp_dir() as d:
             with open(os.path.join(d, 'README.txt'), 'wb') as readme:
-                readme.write('This is a test file.\n')
+                readme.write(b'This is a test file.\n')
             subprocess.check_call([appx_exe(),
                                    '-o', os.path.join(d, 'test.appx'),
                                    '-9',

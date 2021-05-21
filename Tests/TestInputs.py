@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 #
 # Copyright (c) 2016-present, Facebook, Inc.
 # Copyright (c) 2021, Neal Gompa
@@ -23,11 +23,11 @@ class TestInputs(unittest.TestCase):
     def test_flat_files(self):
         with appx.util.temp_dir() as d:
             with open(os.path.join(d, 'README.txt'), 'wb') as readme:
-                readme.write('This is a test file.\n')
+                readme.write(b'This is a test file.\n')
             os.mkdir(os.path.join(d, 'somedir'))
             with open(os.path.join(d, 'somedir', 'other_file.dll'), 'wb') \
                 as other_file:
-                other_file.write('MZ')
+                other_file.write(b'MZ')
             subprocess.check_call([
                 appx_exe(), '-o', os.path.join(d, 'test.appx'),
                 os.path.join(d, 'README.txt'),
@@ -40,11 +40,11 @@ class TestInputs(unittest.TestCase):
     def test_directory(self):
         with appx.util.temp_dir() as d:
             with open(os.path.join(d, 'README.txt'), 'wb') as readme:
-                readme.write('This is a test file.\n')
+                readme.write(b'This is a test file.\n')
             os.mkdir(os.path.join(d, 'somedir'))
             with open(os.path.join(d, 'somedir', 'other_file.dll'), 'wb') \
                 as other_file:
-                other_file.write('MZ')
+                other_file.write(b'MZ')
             subprocess.check_call([appx_exe(), '-o',
                                    os.path.join(d, 'test.appx'), d])
             with zipfile.ZipFile(os.path.join(d, 'test.appx')) as zip:
@@ -57,9 +57,9 @@ class TestInputs(unittest.TestCase):
     def test_file_mapping(self):
         with appx.util.temp_dir() as d:
             with open(os.path.join(d, 'README.txt'), 'wb') as readme:
-                readme.write('This is a test file.\n')
+                readme.write(b'This is a test file.\n')
             with open(os.path.join(d, 'other_file.dll'), 'wb') as other_file:
-                other_file.write('MZ')
+                other_file.write(b'MZ')
             subprocess.check_call([
                 appx_exe(), '-o', os.path.join(d, 'test.appx'),
                 'README.txt={}'.format(os.path.join(d, 'README.txt')),
@@ -74,9 +74,9 @@ class TestInputs(unittest.TestCase):
     def test_mapping_file(self):
         with appx.util.temp_dir() as d:
             with open(os.path.join(d, 'README.txt'), 'wb') as readme:
-                readme.write('This is a test file.\n')
+                readme.write(b'This is a test file.\n')
             with open(os.path.join(d, 'other_file.dll'), 'wb') as other_file:
-                other_file.write('MZ')
+                other_file.write(b'MZ')
             with open(os.path.join(d, 'mapping.txt'), 'w') as mapping_file:
                 mapping_file.write(
                     '[Files]\n'
@@ -103,7 +103,7 @@ class TestInputs(unittest.TestCase):
             ], stderr=subprocess.PIPE)
             (_, stderr) = process.communicate()
             self.assertEqual(1, process.returncode)
-            self.assertNotIn('Malformed', stderr)
+            self.assertNotIn('Malformed', stderr.decode('utf-8'))
             # TODO(strager)
             #self.assertIn('mapping.txt', stderr)
             #self.assertIn('no such file', stderr)
@@ -111,7 +111,7 @@ class TestInputs(unittest.TestCase):
     def test_mapping_file_syntax(self):
         with appx.util.temp_dir() as d:
             with open(os.path.join(d, 'README.txt'), 'wb') as readme:
-                readme.write('This is a test file.\n')
+                readme.write(b'This is a test file.\n')
             mapping_file_test_cases = [
                 # One file.
                 '[Files]\n"{}" "README.txt"'.format(
@@ -185,15 +185,15 @@ class TestInputs(unittest.TestCase):
                 ], stderr=subprocess.PIPE)
                 (_, stderr) = process.communicate()
                 self.assertEqual(1, process.returncode)
-                self.assertIn('mapping.txt', stderr)
-                self.assertIn('Malformed', stderr)
+                self.assertIn('mapping.txt', stderr.decode('utf-8'))
+                self.assertIn('Malformed', stderr.decode('utf-8'))
 
     def test_mapping_file_stdin(self):
         with appx.util.temp_dir() as d:
             with open(os.path.join(d, 'README.txt'), 'wb') as readme:
-                readme.write('This is a test file.\n')
+                readme.write(b'This is a test file.\n')
             with open(os.path.join(d, 'other_file.dll'), 'wb') as other_file:
-                other_file.write('MZ')
+                other_file.write(b'MZ')
             mapping_file = (
                 '[Files]\n'
                 '"{}" "README.txt"\n'
@@ -207,7 +207,7 @@ class TestInputs(unittest.TestCase):
                 '-f', '-',
             ]
             process = subprocess.Popen(command, stdin=subprocess.PIPE)
-            (_, _) = process.communicate(mapping_file)
+            (_, _) = process.communicate(mapping_file.encode('utf-8'))
             if process.returncode != 0:
                 raise subprocess.CalledProcessError(process.returncode, command)
             with zipfile.ZipFile(os.path.join(d, 'test.appx')) as zip:
