@@ -13,4 +13,4 @@ possible. If you run into problems, please open an issue. We also actively welco
 ## License
 
 By contributing to appx-util you agree that your contributions will be licensed
-under its BSD license.
+under [the Mozilla Public License, version 2.0](https://www.mozilla.org/en-US/MPL/2.0/).
