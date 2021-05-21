@@ -10,7 +10,7 @@
 
 #include <string>
 
-namespace facebook {
+namespace osinside {
 namespace appx {
     std::string XMLEncodeString(const std::string &);
 }

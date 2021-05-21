@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include <zlib.h>
 
-namespace facebook {
+namespace osinside {
 namespace appx {
     // Creates and optionally signs an APPX file.
     //

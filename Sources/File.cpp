@@ -8,7 +8,7 @@
 
 #include <APPX/File.h>
 
-namespace facebook {
+namespace osinside {
 namespace appx {
     ErrnoException::ErrnoException() : ErrnoException(errno)
     {

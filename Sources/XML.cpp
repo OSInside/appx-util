@@ -9,7 +9,7 @@
 #include <APPX/XML.h>
 #include <unordered_map>
 
-namespace facebook {
+namespace osinside {
 namespace appx {
     std::string XMLEncodeString(const std::string &s)
     {

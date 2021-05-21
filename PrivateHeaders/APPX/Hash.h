@@ -12,7 +12,7 @@
 #include <cstring>
 #include <openssl/sha.h>
 
-namespace facebook {
+namespace osinside {
 namespace appx {
     struct SHA256Hash
     {

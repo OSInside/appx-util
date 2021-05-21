@@ -13,7 +13,7 @@
 #include <openssl/asn1t.h>
 #include <vector>
 
-namespace facebook {
+namespace osinside {
 namespace appx {
     namespace {
         namespace oid {

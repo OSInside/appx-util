@@ -15,7 +15,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace facebook {
+namespace osinside {
 namespace appx {
     // An exception representing an OpenSSL error.
     class OpenSSLException : public std::runtime_error

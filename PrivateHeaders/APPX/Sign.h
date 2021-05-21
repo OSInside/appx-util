@@ -13,7 +13,7 @@
 #include <cstdint>
 #include <openssl/pkcs7.h>
 
-namespace facebook {
+namespace osinside {
 namespace appx {
     struct APPXDigests;
 

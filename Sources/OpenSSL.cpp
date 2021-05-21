@@ -9,7 +9,7 @@
 #include <APPX/OpenSSL.h>
 #include <openssl/err.h>
 
-namespace facebook {
+namespace osinside {
 namespace appx {
     namespace {
         static std::string GetErrorString(unsigned long error)

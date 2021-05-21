@@ -23,7 +23,7 @@
 
 // A sink is an object to which bytes can be written.
 
-namespace facebook {
+namespace osinside {
 namespace appx {
     // A sink which writes to a file.
     class FileSink

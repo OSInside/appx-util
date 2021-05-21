@@ -11,7 +11,7 @@
 #include <cstring>
 #include <string>
 
-namespace facebook {
+namespace osinside {
 namespace appx {
     std::string ZIPFileEntry::SanitizedFileName(const std::string &fileName)
     {

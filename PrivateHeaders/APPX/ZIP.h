@@ -28,7 +28,7 @@
 #include <vector>
 #include <zlib.h>
 
-namespace facebook {
+namespace osinside {
 namespace appx {
     // Timestamp for files in ZIP archives. Hard-coded so archiving is
     // deterministic.

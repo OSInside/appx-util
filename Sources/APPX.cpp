@@ -16,7 +16,7 @@
 #include <unordered_map>
 #include <vector>
 
-namespace facebook {
+namespace osinside {
 namespace appx {
     namespace {
         // TODO(strager): Stream data instead of returning a chunk of memory.

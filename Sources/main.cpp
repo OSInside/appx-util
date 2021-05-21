@@ -19,7 +19,7 @@
 #include <unordered_map>
 #include <vector>
 
-using namespace facebook::appx;
+using namespace osinside::appx;
 
 namespace {
 struct FTSDeleter

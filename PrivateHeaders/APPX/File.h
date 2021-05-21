@@ -15,7 +15,7 @@
 #include <memory>
 #include <string>
 
-namespace facebook {
+namespace osinside {
 namespace appx {
     // An exception representing a POSIX error (ENOENT, etc.).
     class ErrnoException : public std::runtime_error
