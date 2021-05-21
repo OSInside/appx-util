@@ -19,20 +19,12 @@ Prerequisites:
 * OpenSSL developer library
 * zlib developer library
 
-Supported build and host platforms and toolchains:
-
-* GNU/Linux with GCC 4.8.1 or GCC 4.9
-* Mac OS X 10.10.5 with clang 3.6.0
+This tool works only on *nix based systems with GCC 7 or newer (or equivalent).
+Linux is the primary target, and while macOS _may_ work, we do not commit to supporting it.
 
 Build:
 
     mkdir Build && cd Build && cmake .. && make
-
-On OS X, you'll need to explicitly point cmake to your OpenSSL
-installation. The easiest method is to install OpenSSL using
-[Homebrew](http://brew.sh/) and then pass `-DOPENSSL_ROOT_DIR=$(brew --prefix openssl)`
-when invoking cmake. You can also compile OpenSSL [from source](https://github.com/openssl/openssl)
-and set `OPENSSL_ROOT_DIR` accordingly.
 
 Install:
 

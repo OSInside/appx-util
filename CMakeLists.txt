@@ -36,34 +36,6 @@ target_link_libraries(appx
                       ${ZLIB_LIBRARIES})
 install(TARGETS appx RUNTIME DESTINATION bin)
 
-# OpenSSL is deprecated on OS X.
-function (APPX_CHECK_OPENSSL_WITH_FLAGS NAME FLAGS)
-  set(CMAKE_REQUIRED_FLAGS "${FLAGS}")
-  set(CMAKE_REQUIRED_INCLUDES ${OPENSSL_INCLUDE_DIRS})
-  set(CMAKE_REQUIRED_LIBRARIES ${OPENSSL_LIBRARIES})
-  check_cxx_source_compiles("#include <openssl/asn1.h>
-
-                             int
-                             main()
-                             {
-                               ASN1_STRING *s = ASN1_STRING_new();
-                               ASN1_STRING_free(s);
-                               return 0;
-                             }
-                             "
-                             "${NAME}"
-                             FAIL_REGEX "is deprecated")
-endfunction ()
-appx_check_openssl_with_flags(APPX_HAS_UNDEPRECATED_OPENSSL "")
-if (NOT APPX_HAS_UNDEPRECATED_OPENSSL)
-  appx_check_openssl_with_flags(APPX_HAS_SUPPRESSABLE_DEPRECATED_OPENSSL
-                                -Wno-deprecated-declarations)
-  if (APPX_HAS_SUPPRESSABLE_DEPRECATED_OPENSSL)
-    set_property(TARGET appx
-                 APPEND PROPERTY COMPILE_OPTIONS -Wno-deprecated-declarations)
-  endif ()
-endif ()
-
 function (APPX_ADD_TEST NAME)
   add_test(NAME "${NAME}"
            COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/Tests/${NAME}.py")
