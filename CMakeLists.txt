@@ -9,7 +9,9 @@
 cmake_minimum_required(VERSION 3.11)
 enable_testing()
 
-project(appx CXX)
+project(appx
+        VERSION 0.2
+        LANGUAGES CXX)
 
 include(CheckCXXSourceCompiles)
 set(CMAKE_CXX_STANDARD 11)
