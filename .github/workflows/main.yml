@@ -1,0 +1,34 @@
+name: Build and Test
+
+
+on: [push, pull_request]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        docker:
+          - 'registry.fedoraproject.org/fedora:latest'
+          - 'registry.opensuse.org/opensuse/tumbleweed-dnf:latest'
+          - 'registry.access.redhat.com/ubi8:latest'
+      fail-fast: false
+
+    container: ${{ matrix.docker }}
+
+    steps:
+      - name: Install pre-requisites
+        run: dnf --assumeyes install
+              cmake gcc gcc-c++ make
+              openssl-devel zlib-devel
+              /usr/bin/python3
+              /usr/bin/git
+      - uses: actions/checkout@v2
+      - name: cmake configure
+        run: cmake -B Build
+      - name: compile with make
+        run: make -C Build
+      - name: test with ctest
+        run: ctest --output-on-failure
+        working-directory: ./Build
