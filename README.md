@@ -1,4 +1,4 @@
-# fb-util-for-appx
+# appx-util
 
 `appx` is a tool which creates and optionally signs
 Microsoft Windows APPX packages.
@@ -44,8 +44,8 @@ Run `appx -h` for usage information.
 
 ## Contributing
 
-fb-util-for-appx actively welcomes contributions from the community.
+appx-util actively welcomes contributions from the community.
 If you're interested in contributing, be sure to check out the
-[contributing guide](https://github.com/facebook/fb-util-for-appx/blob/master/CONTRIBUTING.md).
+[contributing guide](https://github.com/OSInside/appx-util/blob/master/CONTRIBUTING.md).
 It includes some tips for getting started in the codebase, as well
-as important information about the code of conduct, license, and CLA.
+as important information about the license.
