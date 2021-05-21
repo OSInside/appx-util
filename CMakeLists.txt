@@ -99,7 +99,7 @@ function (APPX_ADD_TEST NAME)
   add_test(NAME "${NAME}"
            COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/Tests/${NAME}.py")
   set_property(TEST "${NAME}" PROPERTY
-               ENVIRONMENT "FB_APPX_PATH=$<TARGET_FILE:appx>")
+               ENVIRONMENT "APPX_EXE_PATH=$<TARGET_FILE:appx>")
 endfunction ()
 appx_add_test(TestInputs)
 appx_add_test(TestValidZIP)

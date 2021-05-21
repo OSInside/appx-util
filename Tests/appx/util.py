@@ -20,9 +20,9 @@ def temp_dir():
         shutil.rmtree(dir)
 
 def appx_exe():
-    path = os.getenv('FB_APPX_PATH')
+    path = os.getenv('APPX_EXE_PATH')
     if path is None:
-        raise Exception('FB_APPX_PATH environment variable must be specified')
+        raise Exception('APPX_EXE_PATH environment variable must be specified')
     return path
 
 def test_dir_path():
