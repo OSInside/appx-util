@@ -15,7 +15,7 @@ systems:
 
 Prerequisites:
 
-* CMake >= 3.0
+* CMake >= 3.11
 * OpenSSL developer library
 * zlib developer library
 

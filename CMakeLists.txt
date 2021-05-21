@@ -6,12 +6,14 @@
 # This source code is licensed under the Mozilla Public License, version 2.0.
 # For details, see the LICENSE file in the root directory of this source tree.
 
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.11)
 enable_testing()
 
-project(appx)
+project(appx CXX)
 
 include(CheckCXXSourceCompiles)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(OpenSSL REQUIRED)
 find_package(ZLIB REQUIRED)
 
@@ -33,39 +35,6 @@ target_link_libraries(appx
                       ${OPENSSL_LIBRARIES}
                       ${ZLIB_LIBRARIES})
 install(TARGETS appx RUNTIME DESTINATION bin)
-
-# Check for C++11 support.
-function (APPX_CHECK_TEMPLATE_USING_WITH_FLAGS NAME FLAGS)
-  set(CMAKE_REQUIRED_FLAGS "${FLAGS}")
-  check_cxx_source_compiles("template<typename T>
-                             using ID = T;
-
-                             ID<int>
-                             main()
-                             {
-                               return 0;
-                             }
-                             "
-                             "${NAME}"
-                             FAIL_REGEX "C\\\\+\\\\+11 extension")
-endfunction ()
-function (APPX_CXX_STD_FLAGS OUT_VAR)
-  appx_check_template_using_with_flags(APPX_HAS_TEMPLATE_USING "")
-  if (APPX_HAS_TEMPLATE_USING)
-    set("${OUT_VAR}" "" PARENT_SCOPE)
-    return ()
-  endif ()
-  appx_check_template_using_with_flags(APPX_HAS_TEMPLATE_USING_STD_CXX11
-                                       "-std=c++11")
-  if (APPX_HAS_TEMPLATE_USING_STD_CXX11)
-    set("${OUT_VAR}" "-std=c++11" PARENT_SCOPE)
-    return ()
-  endif ()
-  message(FATAL_ERROR "Compiler lacks C++11 support")
-endfunction ()
-appx_cxx_std_flags(APPX_CXX_STD_FLAGS)
-set_property(TARGET appx
-             APPEND PROPERTY COMPILE_OPTIONS "${APPX_CXX_STD_FLAGS}")
 
 # OpenSSL is deprecated on OS X.
 function (APPX_CHECK_OPENSSL_WITH_FLAGS NAME FLAGS)
