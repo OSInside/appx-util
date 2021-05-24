@@ -133,16 +133,16 @@ namespace appx {
         void WriteFileRecordHeader(TSink &sink) const
         {
             std::uint8_t data[] = {
-                FB_BYTES_4_LE(0x04034B50),  // Signature.
-                FB_BYTES_2_LE(kFileExtractVersion),
-                FB_BYTES_2_LE(0),  // Flags.
-                FB_BYTES_2_LE(
+                APPXUTIL_BYTES_4_LE(0x04034B50),  // Signature.
+                APPXUTIL_BYTES_2_LE(kFileExtractVersion),
+                APPXUTIL_BYTES_2_LE(0),  // Flags.
+                APPXUTIL_BYTES_2_LE(
                     static_cast<std::uint16_t>(this->compressionType)),
-                FB_BYTES_2_LE(kFileTime), FB_BYTES_2_LE(kFileDate),
-                FB_BYTES_4_LE(this->crc32), FB_BYTES_4_LE(this->compressedSize),
-                FB_BYTES_4_LE(this->uncompressedSize),
-                FB_BYTES_2_LE(this->sanitizedFileName.size()),
-                FB_BYTES_2_LE(0),  // Extra field length.
+                APPXUTIL_BYTES_2_LE(kFileTime), APPXUTIL_BYTES_2_LE(kFileDate),
+                APPXUTIL_BYTES_4_LE(this->crc32), APPXUTIL_BYTES_4_LE(this->compressedSize),
+                APPXUTIL_BYTES_4_LE(this->uncompressedSize),
+                APPXUTIL_BYTES_2_LE(this->sanitizedFileName.size()),
+                APPXUTIL_BYTES_2_LE(0),  // Extra field length.
             };
             sink.Write(sizeof(data), data);
             sink.Write(this->sanitizedFileName.size(),
@@ -159,22 +159,22 @@ namespace appx {
         void WriteDirectoryEntry(TSink &sink) const
         {
             std::uint8_t data[] = {
-                FB_BYTES_4_LE(0x02014B50),  // Signature.
-                FB_BYTES_2_LE(kArchiverVersion),
-                FB_BYTES_2_LE(kFileExtractVersion),
-                FB_BYTES_2_LE(0),  // Flags.
-                FB_BYTES_2_LE(
+                APPXUTIL_BYTES_4_LE(0x02014B50),  // Signature.
+                APPXUTIL_BYTES_2_LE(kArchiverVersion),
+                APPXUTIL_BYTES_2_LE(kFileExtractVersion),
+                APPXUTIL_BYTES_2_LE(0),  // Flags.
+                APPXUTIL_BYTES_2_LE(
                     static_cast<std::uint16_t>(this->compressionType)),
-                FB_BYTES_2_LE(kFileTime), FB_BYTES_2_LE(kFileDate),
-                FB_BYTES_4_LE(this->crc32), FB_BYTES_4_LE(this->compressedSize),
-                FB_BYTES_4_LE(this->uncompressedSize),
-                FB_BYTES_2_LE(this->sanitizedFileName.size()),
-                FB_BYTES_2_LE(0),  // Extra field length.
-                FB_BYTES_2_LE(0),  // File comment length.
-                FB_BYTES_2_LE(0),  // Disk number start.
-                FB_BYTES_2_LE(0),  // Internal file attributes.
-                FB_BYTES_4_LE(0),  // External file attributes.
-                FB_BYTES_4_LE(this->fileRecordHeaderOffset),
+                APPXUTIL_BYTES_2_LE(kFileTime), APPXUTIL_BYTES_2_LE(kFileDate),
+                APPXUTIL_BYTES_4_LE(this->crc32), APPXUTIL_BYTES_4_LE(this->compressedSize),
+                APPXUTIL_BYTES_4_LE(this->uncompressedSize),
+                APPXUTIL_BYTES_2_LE(this->sanitizedFileName.size()),
+                APPXUTIL_BYTES_2_LE(0),  // Extra field length.
+                APPXUTIL_BYTES_2_LE(0),  // File comment length.
+                APPXUTIL_BYTES_2_LE(0),  // Disk number start.
+                APPXUTIL_BYTES_2_LE(0),  // Internal file attributes.
+                APPXUTIL_BYTES_4_LE(0),  // External file attributes.
+                APPXUTIL_BYTES_4_LE(this->fileRecordHeaderOffset),
             };
             sink.Write(sizeof(data), data);
             sink.Write(this->sanitizedFileName.size(),
@@ -242,29 +242,29 @@ namespace appx {
         off_t centralDirectoryEndOffset = offset;
         std::uint8_t data[] = {
             // ZIP64 central directory end.
-            FB_BYTES_4_LE(0x06064B50),  // Signature.
-            FB_BYTES_8_LE(56 - 12),     // Size of this record after this field.
-            FB_BYTES_2_LE(kArchiverVersion),
-            FB_BYTES_2_LE(kArchiveExtractVersion),
-            FB_BYTES_4_LE(0),  // Index of this disk.
-            FB_BYTES_4_LE(0),  // Index of disk with central directory start.
-            FB_BYTES_8_LE(entries.size()),  // Entries in this disk.
-            FB_BYTES_8_LE(entries.size()),  // Entries in central directory.
-            FB_BYTES_8_LE(directoryEntriesSize),
-            FB_BYTES_8_LE(fileRecordsSize),  // Offset of directory start.
+            APPXUTIL_BYTES_4_LE(0x06064B50),  // Signature.
+            APPXUTIL_BYTES_8_LE(56 - 12),     // Size of this record after this field.
+            APPXUTIL_BYTES_2_LE(kArchiverVersion),
+            APPXUTIL_BYTES_2_LE(kArchiveExtractVersion),
+            APPXUTIL_BYTES_4_LE(0),  // Index of this disk.
+            APPXUTIL_BYTES_4_LE(0),  // Index of disk with central directory start.
+            APPXUTIL_BYTES_8_LE(entries.size()),  // Entries in this disk.
+            APPXUTIL_BYTES_8_LE(entries.size()),  // Entries in central directory.
+            APPXUTIL_BYTES_8_LE(directoryEntriesSize),
+            APPXUTIL_BYTES_8_LE(fileRecordsSize),  // Offset of directory start.
             // ZIP64 central directory locator.
-            FB_BYTES_4_LE(0x07064B50),  // Signature.
-            FB_BYTES_4_LE(0),  // Index of disk with central directory end.
-            FB_BYTES_8_LE(centralDirectoryEndOffset),
-            FB_BYTES_4_LE(1),  // Number of disks.
+            APPXUTIL_BYTES_4_LE(0x07064B50),  // Signature.
+            APPXUTIL_BYTES_4_LE(0),  // Index of disk with central directory end.
+            APPXUTIL_BYTES_8_LE(centralDirectoryEndOffset),
+            APPXUTIL_BYTES_4_LE(1),  // Number of disks.
             // Central directory record.
-            FB_BYTES_4_LE(0x06054B50),  // Signature.
-            FB_BYTES_2_LE(0),           // Index of this disk.
-            FB_BYTES_2_LE(0),  // Index of disk with central directory start.
-            FB_BYTES_4_LE(0xFFFFFFFF),  // Entries in this disk.
-            FB_BYTES_4_LE(0xFFFFFFFF),  // Entries in central directory.
-            FB_BYTES_4_LE(0xFFFFFFFF),  // Central directory start offset.
-            FB_BYTES_2_LE(0),           // Comment length.
+            APPXUTIL_BYTES_4_LE(0x06054B50),  // Signature.
+            APPXUTIL_BYTES_2_LE(0),           // Index of this disk.
+            APPXUTIL_BYTES_2_LE(0),  // Index of disk with central directory start.
+            APPXUTIL_BYTES_4_LE(0xFFFFFFFF),  // Entries in this disk.
+            APPXUTIL_BYTES_4_LE(0xFFFFFFFF),  // Entries in central directory.
+            APPXUTIL_BYTES_4_LE(0xFFFFFFFF),  // Central directory start offset.
+            APPXUTIL_BYTES_2_LE(0),           // Comment length.
         };
         sink.Write(sizeof(data), data);
     }

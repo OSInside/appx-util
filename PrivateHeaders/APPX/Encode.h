@@ -42,21 +42,21 @@ namespace appx {
 
 // Expands to a list of std::uint8_t expressions, suitable for embedding in an
 // array literal.
-#define FB_BYTES_1(x) ::osinside::appx::RangeChecker<::std::uint8_t>::Check((x))
+#define APPXUTIL_BYTES_1(x) ::osinside::appx::RangeChecker<::std::uint8_t>::Check((x))
 
-#define FB_BYTES_2_LE(x)                                              \
+#define APPXUTIL_BYTES_2_LE(x)                                        \
     static_cast<::std::uint8_t>(                                      \
         ::osinside::appx::RangeChecker<::std::uint16_t>::Check((x))), \
         static_cast<::std::uint8_t>(static_cast<::std::uint16_t>((x)) >> 8)
 
-#define FB_BYTES_4_LE(x)                                                      \
+#define APPXUTIL_BYTES_4_LE(x)                                                \
     static_cast<::std::uint8_t>(                                              \
         ::osinside::appx::RangeChecker<::std::uint32_t>::Check((x))),         \
         static_cast<::std::uint8_t>(static_cast<::std::uint32_t>((x)) >> 8),  \
         static_cast<::std::uint8_t>(static_cast<::std::uint32_t>((x)) >> 16), \
         static_cast<::std::uint8_t>(static_cast<::std::uint32_t>((x)) >> 24)
 
-#define FB_BYTES_8_LE(x)                                                      \
+#define APPXUTIL_BYTES_8_LE(x)                                                \
     static_cast<::std::uint8_t>(                                              \
         ::osinside::appx::RangeChecker<::std::uint64_t>::Check((x))),         \
         static_cast<::std::uint8_t>(static_cast<::std::uint64_t>((x)) >> 8),  \
