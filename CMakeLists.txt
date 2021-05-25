@@ -10,7 +10,7 @@ cmake_minimum_required(VERSION 3.11)
 enable_testing()
 
 project(appx
-        VERSION 0.2
+        VERSION 0.3
         LANGUAGES CXX)
 
 include(CheckCXXSourceCompiles)
