@@ -6,6 +6,8 @@
 #
 # This source code is licensed under the Mozilla Public License, version 2.0.
 # For details, see the LICENSE file in the root directory of this source tree.
+# Portions of this code was previously licensed under a BSD-style license.
+# See the LICENSE-BSD file in the root directory of this source tree for details.
 
 from appx.util import appx_exe
 from xml.etree import ElementTree
