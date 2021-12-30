@@ -13,6 +13,7 @@
 #include <cassert>
 #include <cstdint>
 #include <openssl/asn1t.h>
+#include <openssl/opensslv.h>
 #include <vector>
 
 namespace osinside {
@@ -139,7 +140,11 @@ namespace appx {
         class EncodedASN1
         {
         public:
+#if OPENSSL_VERSION_NUMBER >= 0x30000000L
+           template <typename T, int (*TEncode)(const T *, std::uint8_t **)>
+#else
             template <typename T, int (*TEncode)(T *, std::uint8_t **)>
+#endif
             static EncodedASN1 FromItem(T *item)
             {
                 std::uint8_t *dataRaw = nullptr;
